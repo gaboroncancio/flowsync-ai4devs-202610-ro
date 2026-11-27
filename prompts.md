@@ -1,35 +1,55 @@
 # Prompts
 
-Aquí van **todos los prompts que lanzaste** para hacer el ejercicio, en el orden en que los
-lanzaste, con el modelo y la herramienta de cada uno.
-
-Esto no es papeleo. Lo que se revisa es **cómo pediste las cosas**, no solo lo que salió: un
-resultado flojo con un prompt bueno y un resultado flojo con un prompt vago necesitan feedback
-distinto, y sin este archivo no se distinguen.
-
-## Cómo rellenarlo
-
-- Un apartado `## Prompt N` por cada prompt.
-- **Pega el prompt tal cual lo lanzaste**, dentro del bloque de código, aunque ocupe diez líneas
-  y aunque tenga faltas. No lo reescribas para que quede bien: el que arreglaste mentalmente
-  después no es el que lanzaste.
-- Incluye también los que **no funcionaron**. Suelen ser los más útiles de leer.
-- `Modelo` y `Herramienta` en todos. Si cambiaste de una a otra a mitad, se nota aquí.
-
-Borra el ejemplo de abajo cuando escribas el primero.
+Encargo FLOW-1 lanzado una sola vez en cada copia, con el mismo texto (leído de `ticket.txt` con `claude "$(cat ../ticket.txt)"`). No hubo intervenciones posteriores en ninguna de las dos.
 
 ---
 
-## Prompt 1
+## Prompt 1 — copia CON harness (8:57)
 
-**Modelo:** Opus 1M xHigh
-**Herramienta:** Claude Code
+**Modelo:** Opus 5.5
+**Herramienta:** Claude Code v2.1.329
 
 ```
-Este es el ejemplo. Bórralo.
+Registro de nuevos usuarios
 
-El prompt va aquí dentro, entero y con sus saltos de línea,
-para que se sepa dónde empieza y dónde acaba.
+Como visitante de FlowSync quiero crear una cuenta con mis datos para poder usar la plataforma.
+
+Criterios de aceptación
+1. Al abrir la página principal veo un formulario de registro.
+2. Puedo registrarme indicando mi nombre, mi correo y una contraseña.
+3. Si algún dato no es válido, veo un mensaje claro junto al campo que debo corregir.
+4. Si el correo ya está registrado, la pantalla me lo indica.
+5. Mientras se procesa mi registro no puedo enviar el formulario de nuevo.
+6. Cuando el registro es exitoso, veo un mensaje de bienvenida con mi nombre y quedo dentro de la plataforma.
 ```
 
-**Qué salió:** (opcional, una línea) funcionó a la primera / tuve que insistir / me inventó una ruta que no existe.
+**Qué salió:** funcionó a la primera (~3 min); lint y build OK; hizo el nombre obligatorio y arrancó el backend pese a declararlo de solo lectura.
+
+---
+
+## Prompt 2 — copia SIN harness (8:58)
+
+**Modelo:** Opus 5.5
+**Herramienta:** Claude Code v2.1.332
+
+```
+Registro de nuevos usuarios
+
+Como visitante de FlowSync quiero crear una cuenta con mis datos para poder usar la plataforma.
+
+Criterios de aceptación
+1. Al abrir la página principal veo un formulario de registro.
+2. Puedo registrarme indicando mi nombre, mi correo y una contraseña.
+3. Si algún dato no es válido, veo un mensaje claro junto al campo que debo corregir.
+4. Si el correo ya está registrado, la pantalla me lo indica.
+5. Mientras se procesa mi registro no puedo enviar el formulario de nuevo.
+6. Cuando el registro es exitoso, veo un mensaje de bienvenida con mi nombre y quedo dentro de la plataforma.
+```
+
+**Qué salió:** funcionó a la primera (~1 min); lint y build OK; menos archivos, dejó restos de la plantilla Vite y el cierre de sesión no invalida el token.
+
+---
+
+## Nota sobre el harness
+
+El `CLAUDE.md` y el hook se redactaron con apoyo de Claude (chat en claude.ai, Opus 5.5) antes de lanzar el encargo; no se lanzaron como prompts a Claude Code.
